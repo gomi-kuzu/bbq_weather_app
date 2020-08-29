@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <script src="js/materialize.js"></script>
+    <title>Sample</title>
+  </head>
+   <body>
+
+      <div class="container">
+      　<div class="row">
+            <div class="col s12 center">
+               <div id="send-button">
+                  <a class="waves-effect waves-light btn-large z-depth-4">当日のキャンプ場周辺の天気を取得！</a>
+               </div>      
+            </div>
+         </div>
+      </div>
+      <div id="result0"></div>
+      <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
+      <div id="result1"></div>
+
+      <script type="text/javascript">
+
+      $('#wicon').attr('src', "./img/dummy.png");
+      document.getElementById("send-button").onclick = function() { 
+      var lat = "34.751371" 
+      var lon = "135.9331174"
+
+      get_weather(lat, lon);
+
+      }
+      function get_weather(lat, lon){
+            // 1. $.getJSONメソッドで通信を行う
+         var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/daily?lang=en&lat=" + lat + "&lon=" + lon,
+            "method": "GET",
+            "headers": {
+               "x-rapidapi-host": "weatherbit-v1-mashape.p.rapidapi.com",
+               "x-rapidapi-key": "56756eeb34msh2020ed539edf055p142e7bjsna604afc4a2aa"
+            }
+         }
+         $.ajax(settings).done(function (response) {
+            var datetime = String(JSON.stringify(response["data"][15]["datetime"]).slice(1,-1));
+//            var datetime = "2020-9-19";
+            console.log(datetime)
+            var day = Number(datetime.split("-")[2])
+            console.log(day);
+            if (day >= 19 ){
+               //16日以内に入った後（要修正：カレンダー問題,14日までは動くはず） 
+               var tmp = day - 19;
+               console.log(tmp);
+               var datetime = JSON.stringify(response["data"][15-tmp]["datetime"]);
+             　var weather_code = JSON.stringify(response["data"][15-tmp]["weather"]["code"]);
+               var max_temp = JSON.stringify(response["data"][15]["max_temp"]);
+               var weather_name = JSON.stringify(response["data"][15-tmp]["weather"]["description"]);
+               var weather_icon =  code2icon(weather_code);
+               var iconurl = "https://openweathermap.org/img/wn/" + weather_icon + "@2x.png";
+               console.log(response);
+               console.log(datetime);
+               console.log(weather_icon)
+               console.log(weather_name);
+               $('#wicon').attr('src', iconurl);
+               document.getElementById('result1').innerHTML = "最高気温：" + String(max_temp) + "℃"
+            }
+            else {
+//          　var weather_icon = JSON.stringify(response["data"][15]["weather"]["icon"]);
+          　var weather_code = JSON.stringify(response["data"][15]["weather"]["code"]);
+            var weather_name = JSON.stringify(response["data"][15]["weather"]["description"]);
+            var max_temp = JSON.stringify(response["data"][15]["max_temp"]);
+            var weather_icon =  code2icon(weather_code);
+            var iconurl = "https://openweathermap.org/img/wn/" + weather_icon + "@2x.png";
+            console.log(response);
+            console.log(datetime);
+            console.log(weather_icon)
+            console.log(weather_name);
+            $('#wicon').attr('src', iconurl);
+            if (day < 19){
+               document.getElementById('result0').innerHTML = "2020-9-19 の天気はまだ配信されていません！<br>代わりに" + datetime +" の天気を表示します"
+            }
+            document.getElementById('result1').innerHTML = "最高気温：" + String(max_temp) + "℃"
+
+            }
+         });
+               }
+         function code2icon(code){
+            var dic = { 2:"11d",3:"09d", 5:"09d", 6:"13d", 7:"50d", 80:"01d", 81:"02d", 82:"03d", 83:"04d"};
+            var tmp
+            var icon
+            tmp = String(code).slice(0,1);
+            if (tmp == "8"){
+               tmp = String(code).slice(0,2);
+            }
+            icon = dic[tmp]
+            return icon;
+         }
+      </script>
+   </body>
+</html>
