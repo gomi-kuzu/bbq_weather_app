@@ -96,12 +96,12 @@
          });
                }
          function code2icon(code){
-            var dic = { 2:"11d",3:"09d", 5:"09d", 6:"13d", 7:"50d", 80:"01d", 81:"02d", 82:"03d", 83:"04d"};
+            var dic = { 2:"11d",3:"09d", 5:"09d", 6:"13d", 7:"50d", 800:"01d", 801:"02d", 802:"03d", 803:"04d"};
             var tmp
             var icon
             tmp = String(code).slice(0,1);
             if (tmp == "8"){
-               tmp = String(code).slice(0,2);
+               tmp = String(code).slice(0,3);
             }
             icon = dic[tmp]
             return icon;
