@@ -22,6 +22,7 @@
       <div id="result0"></div>
       <div id="icon"><img id="wicon" src="" alt="Weather icon"></div>
       <div id="result1"></div>
+      <div id="result2"></div>
 
       <script type="text/javascript">
 
@@ -35,6 +36,7 @@
       }
       function get_weather(lat, lon){
             // 1. $.getJSONメソッドで通信を行う
+         $('#wicon').attr('src', "./img/load.png");
          var settings = {
             "async": true,
             "crossDomain": true,
@@ -66,7 +68,8 @@
                console.log(weather_icon)
                console.log(weather_name);
                $('#wicon').attr('src', iconurl);
-               document.getElementById('result1').innerHTML = "最高気温：" + String(max_temp) + "℃"
+            document.getElementById('result1').innerHTML = "天気：" + String(weather_name.slice(1,-1))
+            document.getElementById('result2').innerHTML = "最高気温：" + String(max_temp) + "℃"
             }
             else {
 //          　var weather_icon = JSON.stringify(response["data"][15]["weather"]["icon"]);
@@ -83,7 +86,8 @@
             if (day < 19){
                document.getElementById('result0').innerHTML = "2020-9-19 の天気はまだ配信されていません！<br>代わりに" + datetime +" の天気を表示します"
             }
-            document.getElementById('result1').innerHTML = "最高気温：" + String(max_temp) + "℃"
+            document.getElementById('result1').innerHTML = "天気：" + String(weather_name.slice(1,-1))
+            document.getElementById('result2').innerHTML = "最高気温：" + String(max_temp) + "℃"
 
             }
          });
