@@ -1,0 +1,17 @@
+{
+    "name":"How's the weather on the BBQ day",
+    "short_name":"Weather BBQ",
+    "icons": [{
+        "src": "./img/icon_180.png",
+        "sizes":"180x180",
+        "type": "image/png"
+      },{
+        "src": "./img/icon_512.png",
+        "sizes":"512x512",
+        "type": "image/png"
+      }],
+    "start_url": "https://gomi-kuzu.github.io/bbq_weather_app/index.html",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF"
+  }
