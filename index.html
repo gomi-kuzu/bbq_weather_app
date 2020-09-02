@@ -39,6 +39,14 @@
 
       <script type="text/javascript">
 
+      if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+      .then((reg) => {
+        console.log('Service worker registered.', reg);
+      });
+}
+
+
       $('#wicon').attr('src', "./img/dummy.png");
       document.getElementById("send-button").onclick = function() { 
       var lat = "34.751371" 
