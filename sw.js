@@ -1,6 +1,8 @@
 const STATIC_DATA = [
   'index.html',
-  './img/dummy.png'
+  './img/dummy.png',
+  './jquery-ui-1.12.1/jquery-ui.js',
+  './jquery-ui-1.12.1/jquery-ui.css',
   // '/css/materialize.css',
   // '/css/materialize.min.css',
   // '/js/materialize.js',
