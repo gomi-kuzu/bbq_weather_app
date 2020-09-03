@@ -1,6 +1,6 @@
 {
     "name":"How's the weather on the BBQ day",
-    "short_name":"Weather BBQ",
+    "short_name":"BBQ天気",
     "icons": [{
         "src": "./img/icon_180.png",
         "sizes":"180x180",
