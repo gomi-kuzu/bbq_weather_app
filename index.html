@@ -77,6 +77,7 @@
             }
          }
          $.ajax(settings).done(function (response) {
+            var magic_num = 10;
             var datetime = String(JSON.stringify(response["data"][15]["datetime"]).slice(1,-1));
             //var datetime = "2020-9-26";
             console.log(datetime)
