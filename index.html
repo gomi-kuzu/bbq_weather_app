@@ -78,7 +78,7 @@
          }
          $.ajax(settings).done(function (response) {
             var magic_num = 10;
-            var datetime = String(JSON.stringify(response["data"][15]["datetime"]).slice(1,-1));
+            var datetime = String(JSON.stringify(response["data"][magic_num]["datetime"]).slice(1,-1));
             //var datetime = "2020-9-26";
             console.log(datetime)
             var day = Number(datetime.split("-")[2])
@@ -92,10 +92,10 @@
             }
 
             console.log(tmp);
-            var datetime = JSON.stringify(response["data"][15-tmp]["datetime"]);
-          　var weather_code = JSON.stringify(response["data"][15-tmp]["weather"]["code"]);
-            var max_temp = JSON.stringify(response["data"][15-tmp]["max_temp"]);
-            var weather_name = JSON.stringify(response["data"][15-tmp]["weather"]["description"]);
+            var datetime = JSON.stringify(response["data"][magic_num-tmp]["datetime"]);
+          　var weather_code = JSON.stringify(response["data"][magic_num-tmp]["weather"]["code"]);
+            var max_temp = JSON.stringify(response["data"][magic_num-tmp]["max_temp"]);
+            var weather_name = JSON.stringify(response["data"][magic_num-tmp]["weather"]["description"]);
             var weather_icon =  code2icon(weather_code);
             var iconurl = "https://openweathermap.org/img/wn/" + weather_icon + "@2x.png";
             console.log(response);
